@@ -32,7 +32,6 @@ A **Business Idea Generator** - an AI-powered SaaS application that:
 
 
 ```bash
-npx create-next-app@15.5.6 saas --typescript
 ```
 
 When prompted, respond to each question:
