@@ -21,3 +21,25 @@
 - **FastAPI**: Modern, async, built on Starlette and Pydantic, Optimized for APIs
 
 
+# AWS - IAM
+
+IAM - Identity Access Management
+
+- Granular security is one of AWS's strengths (Super tiresome and painful, but for good reason)
+- We will start by creating a Root User (Only used for assigning permission & budgeting)
+- Then we will create our "IAM User" (Called aiengineer - we will be our workhorse for the course)
+
+## AWS services used
+
+- **App runner**: Deploy containers (Simplest AWS way to deploy containerized web applications)
+- **ECR Elastic Container Registry**: Registry (Like github but for container on AWS)
+- **CloudWatch**: Monitoring (Collects logs from all your AWS services)
+
+# Docker
+
+- A box within your box (A lightweight alternative to VMs that shares the host's OS)
+- Isolated, portable (Run the same software everywhere)
+
+- **DockerFile**: Recipe (A text file with instructions for installing & configuring)
+- **Image**: Snapshot (Created by building a Dockerfile and ready to be made live)
+- **Container**: A live instance (A running isolated environment created from an image)
