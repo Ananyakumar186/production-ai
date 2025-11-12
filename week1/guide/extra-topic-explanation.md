@@ -21,7 +21,9 @@
 - **FastAPI**: Modern, async, built on Starlette and Pydantic, Optimized for APIs
 
 
-# AWS - IAM
+# AWS 
+
+## IAM
 
 IAM - Identity Access Management
 
@@ -34,6 +36,24 @@ IAM - Identity Access Management
 - **App runner**: Deploy containers (Simplest AWS way to deploy containerized web applications)
 - **ECR Elastic Container Registry**: Registry (Like github but for container on AWS)
 - **CloudWatch**: Monitoring (Collects logs from all your AWS services)
+
+## Cloud Deployment Archetypes
+
+- **Traditional Cloud Servers - IaaS**: Where evrything started; rent a server and install everything Eg: EC2 (AWS)
+- **Platform as a Service - PaaS**: Just bring you code; the deployment is handled for you. Eg: Vercel Beanstalk
+- **Container as a Service - Caas**: You provide an app in a container; the service takes care of the rest. Eg: App Runner (AWS)
+- **Container Orchestration**: Run your own fleet of containers and manage how they scale. Eg: ECS, EKS (AWS)
+- **Serverless Functions - FaaS**: Upload individual tiny functions and pay per request. Eg: Lambda
+
+## AWS BIOLOGY
+
+### Components
+
+- **Amazon S3: Simple Storage Service**: Like a shared drive in the cloud, organized in "buckets"
+- **Aws Lambda**: Individual functions on the cloud, pay for CPU time.
+- **Amazon CloudFront**: A content delivery network (CDN) for quickly serving static content.
+- **Amazon API Gateway**: Create , manage and scale APIs.
+- **Amazon Bedrock**: Quickly build Gen AI applications by connecting to LLMs
 
 # Docker
 
