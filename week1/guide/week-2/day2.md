@@ -664,6 +664,8 @@ This method is more reliable for larger packages and slower internet connections
 3. Set Timeout to **30 seconds**
 4. Click **Save**
 
+Note: We do this part because LLM api takes more than default timeout 3 seconds in the configuration to give the response, hence needs to be increased.
+
 ### Step 6: Test the Lambda Function
 
 1. Click **Test** tab
