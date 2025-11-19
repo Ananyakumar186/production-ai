@@ -908,7 +908,7 @@ This creates an `out` directory with static files.
 **Note**: With Next.js 15.5 and App Router, you must set `output: 'export'` in the config to generate the `out` directory.
 
 ### Step 4: Upload to S3
-
+Note: Configure aws cli from day-5 week1 guide before proceeding,
 Use the AWS CLI to upload your static files:
 
 ```bash
