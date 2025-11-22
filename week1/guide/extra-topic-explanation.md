@@ -49,10 +49,10 @@ IAM - Identity Access Management
 
 ### Components
 
-- **Amazon S3: Simple Storage Service**: Like a shared drive in the cloud, organized in "buckets"
-- **Aws Lambda**: Individual functions on the cloud, pay for CPU time.
+- **Amazon S3: Simple Storage Service**: Like a shared drive in the cloud, organized in "buckets", this is where the build file is uploaded, and memory management for api to handle history.
+- **Aws Lambda**: Individual functions on the cloud, to add the backend code to run, pay for CPU time.
 - **Amazon CloudFront**: A content delivery network (CDN) for quickly serving static content.
-- **Amazon API Gateway**: Create , manage and scale APIs.
+- **Amazon API Gateway**: Create , manage and scale APIs and handle their routes.
 - **Amazon Bedrock**: Quickly build Gen AI applications by connecting to LLMs
 
 # Docker
