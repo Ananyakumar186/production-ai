@@ -39,7 +39,7 @@ IAM - Identity Access Management
 
 ## Cloud Deployment Archetypes
 
-- **Traditional Cloud Servers - IaaS**: Where evrything started; rent a server and install everything Eg: EC2 (AWS)
+- **Traditional Cloud Servers - IaaS**: Where evrything started; rent a server and install everything Eg: EC2 (AWS), Terraform
 - **Platform as a Service - PaaS**: Just bring you code; the deployment is handled for you. Eg: Vercel Beanstalk
 - **Container as a Service - Caas**: You provide an app in a container; the service takes care of the rest. Eg: App Runner (AWS)
 - **Container Orchestration**: Run your own fleet of containers and manage how they scale. Eg: ECS, EKS (AWS)
@@ -54,6 +54,30 @@ IAM - Identity Access Management
 - **Amazon CloudFront**: A content delivery network (CDN) for quickly serving static content.
 - **Amazon API Gateway**: Create , manage and scale APIs and handle their routes.
 - **Amazon Bedrock**: Quickly build Gen AI applications by connecting to LLMs
+
+## AWS Terraform
+
+- **Controlled: Checked into Git**: .tf files with your configuration (Not checked in state files that map configuration to resources).
+
+- **Automated: Configures Everything**: No more AWS console! Everything we did is automated (except IAM).
+
+- **Repeatable: Destroy & Recreate**: terraform init - stands up your entire environment terraform destroy -deletes.
+
+- **AWS CDK** is Amazon's proprietary version.
+
+### Terminology
+
+- **Provider**: A vendor like AWS (A plugin to make Terraform apply to that provider).
+
+- **Variable**: Parameters (Configurable settings that affect your deployment).
+
+- **Resource**: The building block (Each AWS service to be created is described with a resource).
+
+- **State**: Record of resources (Maps the configuration to actual resources).
+
+- **Output**: Results of deployment (Like actual CloudFront distribution URLs).
+
+- **Workspaces**: Separated State (Isolated state for the same configuration).
 
 # Docker
 
