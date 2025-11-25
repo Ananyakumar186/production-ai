@@ -87,3 +87,9 @@ IAM - Identity Access Management
 - **DockerFile**: Recipe (A text file with instructions for installing & configuring)
 - **Image**: Snapshot (Created by building a Dockerfile and ready to be made live)
 - **Container**: A live instance (A running isolated environment created from an image)
+
+# Github Actions
+
+- **Actions**: Platform (Run scripts in response to actions like doing a git push).
+- **Workflows**: Orchestration (YAML files stored in github/workflows).
+- **Jobs**: Execution (Collection of steps that run on a 'Runner' VM). 
