@@ -54,6 +54,7 @@ IAM - Identity Access Management
 - **Amazon CloudFront**: A content delivery network (CDN) for quickly serving static content.
 - **Amazon API Gateway**: Create , manage and scale APIs and handle their routes.
 - **Amazon Bedrock**: Quickly build Gen AI applications by connecting to LLMs
+- **AWS Resource Explorer**: Used to check the overall resouce allocation or services used for a website or project.
 
 ## AWS Terraform
 
