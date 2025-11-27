@@ -141,6 +141,14 @@ sudo mv terraform /usr/local/bin/
    - Right-click "This PC" → Properties
    - Advanced system settings → Environment Variables
    - Edit PATH and add the Terraform directory
+   
+### Or
+
+1. Install chocolatey
+2. Run the below command
+```bash
+choco install terraform
+```
 
 **Verify Installation:**
 ```bash
