@@ -16,12 +16,6 @@ variable "environment" {
     }
 }
 
-variable openai_api_key {
-  type        = string
-  default     = ""
-  description = "openai api key"
-}
-
 
 
 variable "lambda_timeout" {
