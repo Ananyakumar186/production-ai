@@ -59,7 +59,7 @@ jobs:
           
           # Make script executable and run it
           chmod +x projects/week-2/twin/scripts/destroy.sh
-          .projects/week-2/twin/scripts/destroy.sh ${{ github.event.inputs.environment }}
+          ./projects/week-2/twin/scripts/destroy.sh ${{ github.event.inputs.environment }}
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
 
