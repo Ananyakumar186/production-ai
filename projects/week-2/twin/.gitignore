@@ -4,7 +4,7 @@
 .terraform.lock.hcl
 terraform.tfstate.d/
 *.tfvars.secret
-
+terraform/github-oidc.tf
 # Lambda packages
 lambda-deployment.zip
 lambda-package/
