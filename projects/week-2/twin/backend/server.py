@@ -33,7 +33,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 # Initialize Bedrock client
 bedrock_client = boto3.client(
     service_name="bedrock-runtime",
-    region_name=os.getenv("DEFAULT_AWS_REGION", "us-west-2"),
+    region_name=os.getenv("DEFAULT_AWS_REGION", "eu-north-1"),
 )
 
 # Bedrock model selection

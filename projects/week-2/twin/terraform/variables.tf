@@ -48,5 +48,11 @@ variable "root_domain" {
   description = "Apex domain name, e.g mydomain.com"
 }
 
+variable openai_api_key {
+  type        = string
+  default     = ""
+  description = "Open API Key"
+}
+
 
 
