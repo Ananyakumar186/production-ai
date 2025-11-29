@@ -59,26 +59,34 @@ jobs:
           cache-dependency-path: projects/week-2/twin/frontend/package-lock.json
 
       - name: Run Deployment Script
+        id: deploy_outputs
         run: |
           # Set environment variables for the script
           export AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}
           export DEFAULT_AWS_REGION=${{ secrets.DEFAULT_AWS_REGION }}
-          
-          # Make script executable and run it
+
+          # Make script executable and run it, capturing outputs
           chmod +x projects/week-2/twin/scripts/deploy.sh
-          ./projects/week-2/twin/scripts/deploy.sh ${{ github.event.inputs.environment || 'dev' }}
+
+          # Run the script and capture outputs
+          OUTPUT=$(./projects/week-2/twin/scripts/deploy.sh ${{ github.event.inputs.environment || 'dev' }} | tee /tmp/deploy.log)
+
+          # Extract values from the script output
+          CLOUDFRONT_URL=$(grep -oP 'CloudFront URL *: *\K.*' /tmp/deploy.log | tail -1)
+          API_URL=$(grep -oP 'API Gateway *: *\K.*' /tmp/deploy.log | tail -1)
+          FRONTEND_BUCKET=$(grep -oP 'Frontend S3 *: *\K.*' /tmp/deploy.log | tail -1)
+          CUSTOM_URL=$(grep -oP 'Custom domain *: *\K.*' /tmp/deploy.log | tail -1 || true)
+
+          # Write outputs for use in later steps
+          {
+            echo "cloudfront_url=$CLOUDFRONT_URL"
+            echo "api_url=$API_URL"
+            echo "frontend_bucket=$FRONTEND_BUCKET"
+            echo "custom_url=$CUSTOM_URL"
+          } >> $GITHUB_OUTPUT
         env:
           AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
           
-      - name: Get Deployment URLs
-        id: deploy_outputs
-        working-directory: ./projects/week-2/twin
-        run: |
-          terraform workspace select ${{ github.event.inputs.environment || 'dev' }} 
-          echo "cloudfront_url=$(terraform output -raw cloudfront_url)" >> $GITHUB_OUTPUT
-          echo "api_url=$(terraform output -raw api_gateway_url)" >> $GITHUB_OUTPUT
-          echo "frontend_bucket=$(terraform output -raw s3_frontend_bucket)" >> $GITHUB_OUTPUT
-
       - name: Invalidate CloudFront
         run: |
           DISTRIBUTION_ID=$(aws cloudfront list-distributions \
