@@ -5,6 +5,7 @@
 terraform.tfstate.d/
 *.tfvars.secret
 terraform/github-oidc.tf
+terraform/backend-setup.tf
 # Lambda packages
 lambda-deployment.zip
 lambda-package/

@@ -49,6 +49,7 @@ export default function Twin() {
                 body: JSON.stringify({
                     message: input,
                     session_id: sessionId || undefined,
+                    model: selectedModel || undefined,
                 }),
             });
 
