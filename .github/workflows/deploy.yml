@@ -81,7 +81,7 @@ jobs:
           {
             echo "cloudfront_url=$CLOUDFRONT_URL"
             echo "api_url=$API_URL"
-            echo "frontend_bucket=$FRONTEND_BUCKET"
+            echo "frontend_bucket=s3://$FRONTEND_BUCKET/"
             echo "custom_url=$CUSTOM_URL"
           } >> $GITHUB_OUTPUT
         env:
