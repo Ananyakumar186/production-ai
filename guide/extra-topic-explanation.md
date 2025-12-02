@@ -1,3 +1,7 @@
+# Project Twin Architecture:
+
+![image info](./twin-architecture.png)
+
 # React - JS/ TS frontend framework
 1. **Component-based**: Reusable components (Building blocks with markup, styles logic)
 2. **Declarative**: Describe UI gien state (React efficiently updates the DOM with any changes)
@@ -94,3 +98,8 @@ IAM - Identity Access Management
 - **Actions**: Platform (Run scripts in response to actions like doing a git push).
 - **Workflows**: Orchestration (YAML files stored in github/workflows).
 - **Jobs**: Execution (Collection of steps that run on a 'Runner' VM). 
+
+# Compare Cloud Services
+
+
+![image info](./cloud-service-compare-chart.png)
