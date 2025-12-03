@@ -182,7 +182,7 @@ export default function Twin() {
                         disabled={isLoading}
                     >
                         <option value="">Select Model</option>
-                        <option value="gpt-40-mini">GPT-40-mini</option>
+                        <option value="gpt-4o-mini">GPT-4o-mini</option>
                         <option value="amazon.nova-lite-v1:0">Amazon Nova Lite</option>
                     </select>
                     <input
