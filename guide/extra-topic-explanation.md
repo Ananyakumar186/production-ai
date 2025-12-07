@@ -94,7 +94,7 @@
 
 - **Difference between Bedrock and SageMaker**:
 
-![image info](./bedrock%20vs%20sagemaker.png)
+    ![image info](./bedrock%20vs%20sagemaker.png)
 
 
 # MLOps
