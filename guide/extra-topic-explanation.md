@@ -14,7 +14,7 @@
 
 5. **Ecosystem**: Incredibly Rich (Forms, Routing, UI component libraries like Material UI, Chakra UI)
 
-# NextJS (***built by Vercel***):
+# NextJS (*built by Vercel*):
 
 - This is the framework built on top of React
 - Includes 2 approaches for Routing requests for pages:
@@ -41,7 +41,7 @@
 
 ## Cloud Deployment Archetypes
 
-- **Traditional Cloud Servers - IaaS**: Where evrything started; rent a server and install everything Eg: EC2 (AWS), Terraform
+- **Traditional Cloud Servers - IaaS**: Where everything started; rent a server and install everything Eg: EC2 (AWS), Terraform
 
 - **Platform as a Service - PaaS**: Just bring you code; the deployment is handled for you. Eg: Vercel Beanstalk
 
@@ -54,6 +54,7 @@
 ## AWS BIOLOGY
 
 ### Components
+
 - **IAM**: Identity Access Management
 
     - Granular security is one of AWS's strengths (Super tiresome and painful, but for good reason)
@@ -83,7 +84,7 @@
 
 - **CloudWatch**: Monitoring (Collects logs from all your AWS services)
 
-- **Amazon SageMaker** (***It's like huggingFace***)
+- **Amazon SageMaker** (*It's like huggingFace*)
 
     - **End-end ML development**: Build , train, fine-tune, deploy and manage your own models.
 
