@@ -6,6 +6,7 @@
     "email": "ananyakumar565@gmail.com",
     "linkedin": "https://linkedin.com/in/ananya-kumar-0365811a2",
     "github": "https://github.com/Ananyakumar186",
+    "github_repositories": "https://github.com/Ananyakumar186?tab=repositories",
     "skills": [
         "Python",
         "JavaScript",
@@ -24,14 +25,19 @@
         "Mentorship",
         "UI/UX Design",
         "Front-End Development",
-        "Web Development",
-        "Software Development",
         "LLM Integration",
         "Software Testing",
         "Agile Development",
         "Problem Solving",
         "Debugging",
         "Clean Code",
-        "Responsive Web Design"
+        "Responsive Web Design",
+        "LLM Engineering",
+        "AI Integration",
+        "Chatbot Development",
+        "Machine Learning Basics",
+        "AWS",
+        "Docker",
+        "Terraform"
     ]
 }

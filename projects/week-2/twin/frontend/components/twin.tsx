@@ -13,7 +13,6 @@ interface Message {
 export default function Twin() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
-    const [selectedModel, setSelectedModel] = useState<string>('');
     const [isLoading, setIsLoading] = useState(false);
     const [sessionId, setSessionId] = useState<string>('');
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -47,6 +46,12 @@ export default function Twin() {
         setIsLoading(true);
 
         try {
+            // Build history from existing messages
+            const history = messages.map(msg => ({
+                role: msg.role,
+                content: msg.content
+            }));
+
             const response = await fetch('http://localhost:8000/chat', {
                 method: 'POST',
                 headers: {
@@ -54,7 +59,8 @@ export default function Twin() {
                 },
                 body: JSON.stringify({
                     message: input,
-                    session_id: sessionId || undefined,
+                    session_id: sessionId,
+                    history: history,
                 }),
             });
 
@@ -144,7 +150,7 @@ export default function Twin() {
                             <div className="flex-shrink-0">
                                 {hasAvatar ? (
                                     <img 
-                                        src="/avatar.png" 
+                                        src="/avatar.jpeg" 
                                         alt="Digital Twin Avatar" 
                                         className="w-8 h-8 rounded-full border border-slate-300"
                                     />
@@ -163,7 +169,7 @@ export default function Twin() {
                                     : 'bg-white border border-gray-200 text-gray-800'
                             }`}
                         >
-                            <p className="whitespace-pre-wrap">{message.content}</p>
+                            <p className="whitespace-pre-wrap text-justify">{message.content}</p>
                             <p
                                 className={`text-xs mt-1 ${
                                     message.role === 'user' ? 'text-slate-300' : 'text-gray-500'
@@ -214,16 +220,7 @@ export default function Twin() {
             {/* Input */}
             <div className="border-t border-gray-200 p-4 bg-white rounded-b-lg">
                 <div className="flex gap-2">
-                    <select
-                        value={selectedModel}
-                        onChange={(e) => setSelectedModel(e.target.value)}
-                        className="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-600 focus:border-transparent text-gray-800 bg-white mr-2"
-                        disabled={isLoading}
-                    >
-                        <option value="">Select Model</option>
-                        <option value="gpt-4o-mini">GPT-4o-mini</option>
-                        <option value="amazon.nova-lite-v1:0">Amazon Nova Lite</option>
-                    </select>
+                    
                     <input
                         type="text"
                         value={input}
