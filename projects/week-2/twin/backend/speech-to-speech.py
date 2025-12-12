@@ -1,5 +1,5 @@
-# Extended version with conversation memory
-from fastapi import FastAPI, File, UploadFile, HTTPException, Form
+# main.py - Enhanced version with streaming support
+from fastapi import FastAPI, File, UploadFile, HTTPException, Form, WebSocket, WebSocketDisconnect
 from fastapi.responses import StreamingResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
@@ -12,6 +12,8 @@ import json
 from dotenv import load_dotenv
 import aiofiles
 from urllib.parse import quote
+import asyncio
+
 app = FastAPI()
 
 app.add_middleware(
@@ -22,7 +24,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-load_dotenv()  # Load environment variables from .env file
+load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
@@ -111,7 +113,8 @@ async def speech_to_speech_with_history(
                 headers={
                     "X-Transcription": quote(user_message),
                     "X-Response-Text": quote(bot_response),
-                    "Content-Disposition": "inline; filename=response.mp3"
+                    "Content-Disposition": "inline; filename=response.mp3",
+                    "Access-Control-Expose-Headers": "X-Transcription, X-Response-Text"
                 }
             )
             
@@ -121,6 +124,16 @@ async def speech_to_speech_with_history(
     except Exception as e:
         print(f"Error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/")
+async def root():
+    return {"message": "Speech-to-Speech API is running"}
+
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
 
 
 if __name__ == "__main__":
