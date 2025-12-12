@@ -39,5 +39,147 @@
         "AWS",
         "Docker",
         "Terraform"
+    ],
+    "projects": [
+        {
+            "name": "Business Idea Generator",
+            "description": "A web application that generates unique business ideas using AI.",
+            "technologies": [
+                "Next.js",
+                "React",
+                "Tailwind CSS",
+                "Clerk for authentication"
+            ],
+            "link": "https://business-idea-generator-ananyakumar186.vercel.app/"
+        },
+        {
+            "name": "Digital Twin",
+            "description": "An AI-powered career speaking chatbot that provides instant responses to portfolio-related queries.",
+            "technologies": [
+                "Python",
+                "Next.js",
+                "Tailwind CSS",
+                "LLM Integration"
+            ],
+            "link": ""
+        },
+        {
+            "name": "E-Irrigation System and Security",
+            "description": "This is a final year project, where we decided to focus on Iot, ML,Android app building to create a prototype of automating the irrigation of the field and to predict and control the water quantity accurately for a particular crop. The hardware components used is Raspberry Pi, Arduino, with DHT22 sensor, Soil Moisture sensor , water flow meter, solenoid valve. The software is an app we designed and developed using Android Studio and Kotlin. The Machine Learning used for predicting the right quantity of water to irrigate a particular crop by using Linear Regression Algorithm. The dataset would contain the crop parameter taken as X and water quantity as Y variable.",
+            "technologies": [
+                "Raspberry Pi",
+                "Arduino",
+                "DHT22 sensor",
+                "Soil Moisture sensor",
+                "Water flow meter",
+                "Solenoid valve",
+                "Android Studio",
+                "Kotlin",
+                "Machine Learning",
+                "Linear Regression Algorithm"
+            ],
+            "link": "https://github.com/Ananyakumar186/E-Irrigation-System-and-Security"
+        },
+        {
+            "name": "Boat Booking Services Online",
+            "description": "This is my internship project where I was given to complete called Boat Booking Services Online using Django Framework and python and MongoDB. The operations are booking a boat which is Insertion, Deletion, Updation of Boat Booking, and then displaying the Booked list that is Viewing operation and also I have used the built-in feature for user Authentication and Registration or simply register login with a simple UI design.",
+            "technologies": [
+                "Django Framework",
+                "Python",
+                "MongoDB"
+            ],
+            "link": "https://github.com/Ananyakumar186/Boat-Services-Booking-online-with-Django"
+        },
+        {
+            "name": "DSC JNNCE",
+            "description": "I have worked with the DSC JNNCE Coding team and coded this website and hosted it in GitHub, I used visual studio code for coding and used the html5 and css3 and bootstrap and javascript as languages and worked with my team and build this website. When working with the Ui/Ux and coding, I used miro for organizing the teams and showed the implementation of designs. ",
+            "technologies": [
+                "HTML5",
+                "CSS3",
+                "Bootstrap",
+                "JavaScript"
+            ],
+            "link": "https://dscjnnce.github.io/dscjnnce/index.html"
+        },
+        {
+            "name": "Facial-Mask Detection",
+            "description": "This is one of the Machine learning project, I have built using OpenCV, Tensorflow, Keras, and imutils, It was an amazing experience on how the data is trained how it detects the mask on our face using the ROI's. As the coding team lead of DSC JNNCE, I am happy I got to build this project.",
+            "technologies": [
+                "Python",
+                "OpenCV",
+                "Tensorflow",
+                "Keras",
+                "imutils"
+            ],
+            "link": "https://github.com/dscjnnce/F-M-Detection"
+        },
+        {
+            "name": "Twitter-user-data",
+            "description": "The project is about finding the accuracy of the model for the twitter-user-data, where I used 3 machine learning algorithms to find the best algorithm for prediction. Those are Logistic regression, Naive Bayes , Random Forest. It also helped me learn about the concepts of NLP, where I learned how to tokenize the dataset and how to use stopwords. ",
+            "technologies": [
+                "Python",
+                "Pandas",
+                "Scikit-learn",
+                "NLP"
+            ],
+            "link": "https://github.com/Ananyakumar186/twitter"
+        },
+        {
+            "name": "Skylens User App",
+            "description": "Capstone project for mobile app development using Flutter. The app allows users to buy telescopes and accessories, view product details, add items to cart, and manage their profiles. Implemented features include user authentication, product listing, cart management, and order processing. The app is designed with a user-friendly interface and responsive design principles to ensure a seamless experience across different devices.",
+            "technologies": [
+                "Flutter",
+                "Dart",
+                "Firebase"
+            ],
+            "link": "https://github.com/Ananyakumar186/firebase-user-app"
+        },
+        {
+            "name": "Skylens Admin App",
+            "description": "Capstone project for mobile app development using Flutter. The admin app allows administrators to manage products, view orders, and handle user accounts. Key features include product addition and deletion and user management functionalities. The app is built with a focus on usability and efficiency, ensuring that admins can easily perform their tasks on the go.",
+            "technologies": [
+                "Flutter",
+                "Dart",
+                "Firebase"
+            ],
+            "link": "https://github.com/Ananyakumar186/skylens_firebase_adminApp"
+        }
+    ],
+    "education": [
+        {
+            "institution": "Jawaharlal Nehru National College of Engineering",
+            "degree": "Bachelor of Engineering in Computer Science and Engineering",
+            "start_year": 2018,
+            "end_year": 2022,
+            "details": "CGPA: 7.8/10"
+        },
+        {
+            "institution": "PESIT, Shivamogga",
+            "degree": "Higher Secondary Education",
+            "start_year": 2016,
+            "end_year": 2018,
+            "details": "Percentage: 83%"
+        },
+        {
+            "institution": "Mandara Jnanadayini School, Shivamogga",
+            "degree": "Secondary Education",
+            "start_year": 2005,
+            "end_year": 2016,
+            "details": "CGPA: 8.6/10"
+        }
+    ],
+    "languages": [
+        {
+            "language": "English",
+            "proficiency": "Professional Working Proficiency"
+        },
+        {
+            "language": "Hindi",
+            "proficiency": "Professional Working Proficiency"
+        },
+        {
+            "language": "Kannada",
+            "proficiency": "Native or Bilingual Proficiency"
+        }
     ]
 }
