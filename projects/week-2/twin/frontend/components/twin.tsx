@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, RefreshCcw } from 'lucide-react';
-
+import { Send, Bot, User, RefreshCcw, LucideSpeaker } from 'lucide-react';
+import Link from 'next/link';
 interface Message {
     id: string;
     role: 'user' | 'assistant';
@@ -237,6 +237,12 @@ export default function Twin() {
                     >
                         <RefreshCcw className="w-5 h-5" />
                     </button>
+                    <Link href="/speech"><button
+                        className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                        <LucideSpeaker className="w-5 h-7" />
+                    </button>
+                    </Link>
                     <button
                         onClick={sendMessage}
                         disabled={!input.trim() || isLoading}
