@@ -1,8 +1,9 @@
 {
     "full_name": "Ananya Kumar",
-    "name": "AK",
+    "name": "Ananya",
     "current_role": "Software Engineer",
     "location": "Bengaluru, India",
+    "native_location": "Shivamogga, India",
     "email": "ananyakumar565@gmail.com",
     "linkedin": "https://linkedin.com/in/ananya-kumar-0365811a2",
     "github": "https://github.com/Ananyakumar186",
@@ -151,7 +152,9 @@
             "degree": "Bachelor of Engineering in Computer Science and Engineering",
             "start_year": 2018,
             "end_year": 2022,
-            "details": "CGPA: 7.8/10"
+            "details": "CGPA: 7.8/10",
+            "link": "https://www.jnnce.ac.in/",
+            "degree_certificate": "../data/certificates/BE.pdf"
         },
         {
             "institution": "PESIT, Shivamogga",
@@ -181,5 +184,51 @@
             "language": "Kannada",
             "proficiency": "Native or Bilingual Proficiency"
         }
+    ],
+    "certifications": [
+        {
+            "title": "Microsoft Certified: Azure Fundamentals",
+            "issuer": "Microsoft",
+            "date": "Jan 2024",
+            "link": "../data/certificates/MFA.pdf"
+        },
+        {
+            "title": "LLM Engineering: Master AI, Large Language Models, and Agents",
+            "issuer": "Udemy",
+            "date": "Jul 2025",
+            "link": "../data/certificates/LLM.pdf"
+        },
+        {
+            "title": "Angular",
+            "issuer": "Data Tech Labs",
+            "date": "Aug 2022",
+            "link": "../data/certificates/Angular.pdf"
+        },
+        {
+            "title": "SQL",
+            "issuer": "Hackerrank",
+            "date": "Sept 2023",
+            "link1": "../data/certificates/sql_basic.pdf",
+            "link2": "../data/certificates/sql_intermediate.pdf"
+        },
+        {
+            "title": "Git",
+            "issuer": "Coursera",
+            "date": "Aug 2020",
+            "link": "../data/certificates/Git.pdf"
+        },
+        {
+            "title": "Restful API using Node.js and Express",
+            "issuer": "NIIT",
+            "date": "Apr 2024",
+            "link": "../data/certificates/API.pdf"
+        },
+        {
+            "title": "Flutter & Dart Essentials- Build Mobile Apps like a Pro",
+            "issuer": "Udemy",
+            "date": "Dec 2024",
+            "link": "../data/certificates/MAD.pdf"
+        }
+
     ]
 }
