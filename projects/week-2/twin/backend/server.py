@@ -1,6 +1,11 @@
 import asyncio
-from fastapi import FastAPI, HTTPException
+from io import BytesIO
+import tempfile
+from urllib.parse import quote
+import aiofiles
+from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from openai import OpenAI
 import os
@@ -45,6 +50,14 @@ class Message(BaseModel):
     content: str
     timestamp: str
 
+class SpeechMessage(BaseModel):
+    role: str
+    content: str
+
+
+class SpeechRequest(BaseModel):
+    messages: List[SpeechMessage]
+    voice: Optional[str] = "alloy"
 
    
 @app.get("/")
@@ -93,6 +106,92 @@ async def chat(request: ChatRequest):
         
     except Exception as e:
         print(f"Error in chat endpoint: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/speech-to-speech")
+async def speech_to_speech_with_history(
+    audio: UploadFile = File(...),
+    conversation_history: Optional[str] = Form(None),
+    voice: str = Form("alloy")
+):
+    """
+    Speech-to-speech with conversation history support
+    """
+    try:
+        audio_data = await audio.read()
+        
+        # Create temp file path
+        temp_audio_path = os.path.join(tempfile.gettempdir(), f"temp_audio_{os.urandom(8).hex()}.webm")
+        
+        # Write audio data asynchronously
+        async with aiofiles.open(temp_audio_path, "wb") as temp_audio:
+            await temp_audio.write(audio_data)
+        
+        try:
+            # Transcribe audio
+            async with aiofiles.open(temp_audio_path, "rb") as audio_file:
+                audio_content = await audio_file.read()
+                transcription = client.audio.transcriptions.create(
+                    model="whisper-1",
+                    file=("audio.webm", audio_content, "audio/webm")
+                )
+            
+            user_message = transcription.text
+            
+            # Build messages array
+            messages = [
+                {
+                    "role": "system",
+                    "content": prompt()
+                }
+            ]
+            
+            # Add conversation history if provided
+            if conversation_history:
+                history = json.loads(conversation_history)
+                messages.extend(history)
+            
+            messages.append({
+                "role": "user",
+                "content": user_message
+            })
+            
+            # Get GPT response
+            completion = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=messages
+            )
+            
+            bot_response = completion.choices[0].message.content or "I apologize, I could not generate a response."
+            
+            # Convert to speech
+            speech_response = client.audio.speech.create(
+                model="tts-1",
+                voice=voice,
+                input=bot_response
+            )
+            
+            audio_buffer = BytesIO()
+            for chunk in speech_response.iter_bytes():
+                audio_buffer.write(chunk)
+            audio_buffer.seek(0)
+            
+            return StreamingResponse(
+                audio_buffer,
+                media_type="audio/mpeg",
+                headers={
+                    "X-Transcription": quote(user_message),
+                    "X-Response-Text": quote(bot_response),
+                    "Content-Disposition": "inline; filename=response.mp3",
+                    "Access-Control-Expose-Headers": "X-Transcription, X-Response-Text"
+                }
+            )
+            
+        finally:
+            os.unlink(temp_audio_path)
+            
+    except Exception as e:
+        print(f"Error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
 

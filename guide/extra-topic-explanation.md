@@ -96,6 +96,12 @@
 
     ![image info](./bedrock%20vs%20sagemaker.png)
 
+- **AWS Databases**
+    - **RDS**: *Relational Databse Service*: the umbrella managed service for relational databses, supporting different engines (MySQL, PostgreSQL).
+    - **Aurora**: one of the Dataase Engines offered in RDS; use RDS to create the database cluster, select Aurora as the engine. Designed by AWS to be fast and scalable.
+    - **Aurora Serverless V2**: Automatically adjusts databse capacity responding qucikly to changes in workload without downtime for pay-as-you-go scaling.
+    - **Dynamo**: is the NoSQL offering.
+    - **DocumentDB**: It is like a mongoDB style database.
 
 # MLOps
 

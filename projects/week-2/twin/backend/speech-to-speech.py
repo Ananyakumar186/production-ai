@@ -39,91 +39,91 @@ class ChatRequest(BaseModel):
     voice: Optional[str] = "alloy"
 
 
-@app.post("/speech-to-speech")
-async def speech_to_speech_with_history(
-    audio: UploadFile = File(...),
-    conversation_history: Optional[str] = Form(None),
-    voice: str = Form("alloy")
-):
-    """
-    Speech-to-speech with conversation history support
-    """
-    try:
-        audio_data = await audio.read()
+# @app.post("/speech-to-speech")
+# async def speech_to_speech_with_history(
+#     audio: UploadFile = File(...),
+#     conversation_history: Optional[str] = Form(None),
+#     voice: str = Form("alloy")
+# ):
+#     """
+#     Speech-to-speech with conversation history support
+#     """
+#     try:
+#         audio_data = await audio.read()
         
-        # Create temp file path
-        temp_audio_path = os.path.join(tempfile.gettempdir(), f"temp_audio_{os.urandom(8).hex()}.webm")
+#         # Create temp file path
+#         temp_audio_path = os.path.join(tempfile.gettempdir(), f"temp_audio_{os.urandom(8).hex()}.webm")
         
-        # Write audio data asynchronously
-        async with aiofiles.open(temp_audio_path, "wb") as temp_audio:
-            await temp_audio.write(audio_data)
+#         # Write audio data asynchronously
+#         async with aiofiles.open(temp_audio_path, "wb") as temp_audio:
+#             await temp_audio.write(audio_data)
         
-        try:
-            # Transcribe audio
-            async with aiofiles.open(temp_audio_path, "rb") as audio_file:
-                audio_content = await audio_file.read()
-                transcription = client.audio.transcriptions.create(
-                    model="whisper-1",
-                    file=("audio.webm", audio_content, "audio/webm")
-                )
+#         try:
+#             # Transcribe audio
+#             async with aiofiles.open(temp_audio_path, "rb") as audio_file:
+#                 audio_content = await audio_file.read()
+#                 transcription = client.audio.transcriptions.create(
+#                     model="whisper-1",
+#                     file=("audio.webm", audio_content, "audio/webm")
+#                 )
             
-            user_message = transcription.text
+#             user_message = transcription.text
             
-            # Build messages array
-            messages = [
-                {
-                    "role": "system",
-                    "content": "You are a helpful assistant. Keep responses concise and conversational."
-                }
-            ]
+#             # Build messages array
+#             messages = [
+#                 {
+#                     "role": "system",
+#                     "content": prompt()
+#                 }
+#             ]
             
-            # Add conversation history if provided
-            if conversation_history:
-                history = json.loads(conversation_history)
-                messages.extend(history)
+#             # Add conversation history if provided
+#             if conversation_history:
+#                 history = json.loads(conversation_history)
+#                 messages.extend(history)
             
-            messages.append({
-                "role": "user",
-                "content": user_message
-            })
+#             messages.append({
+#                 "role": "user",
+#                 "content": user_message
+#             })
             
-            # Get GPT response
-            completion = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=messages
-            )
+#             # Get GPT response
+#             completion = client.chat.completions.create(
+#                 model="gpt-4o-mini",
+#                 messages=messages
+#             )
             
-            bot_response = completion.choices[0].message.content or "I apologize, I could not generate a response."
+#             bot_response = completion.choices[0].message.content or "I apologize, I could not generate a response."
             
-            # Convert to speech
-            speech_response = client.audio.speech.create(
-                model="tts-1",
-                voice=voice,
-                input=bot_response
-            )
+#             # Convert to speech
+#             speech_response = client.audio.speech.create(
+#                 model="tts-1",
+#                 voice=voice,
+#                 input=bot_response
+#             )
             
-            audio_buffer = BytesIO()
-            for chunk in speech_response.iter_bytes():
-                audio_buffer.write(chunk)
-            audio_buffer.seek(0)
+#             audio_buffer = BytesIO()
+#             for chunk in speech_response.iter_bytes():
+#                 audio_buffer.write(chunk)
+#             audio_buffer.seek(0)
             
-            return StreamingResponse(
-                audio_buffer,
-                media_type="audio/mpeg",
-                headers={
-                    "X-Transcription": quote(user_message),
-                    "X-Response-Text": quote(bot_response),
-                    "Content-Disposition": "inline; filename=response.mp3",
-                    "Access-Control-Expose-Headers": "X-Transcription, X-Response-Text"
-                }
-            )
+#             return StreamingResponse(
+#                 audio_buffer,
+#                 media_type="audio/mpeg",
+#                 headers={
+#                     "X-Transcription": quote(user_message),
+#                     "X-Response-Text": quote(bot_response),
+#                     "Content-Disposition": "inline; filename=response.mp3",
+#                     "Access-Control-Expose-Headers": "X-Transcription, X-Response-Text"
+#                 }
+#             )
             
-        finally:
-            os.unlink(temp_audio_path)
+#         finally:
+#             os.unlink(temp_audio_path)
             
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
+#     except Exception as e:
+#         print(f"Error: {str(e)}")
+#         raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/")
