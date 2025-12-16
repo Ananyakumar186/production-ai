@@ -3,6 +3,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { Bot, MessageCircleIcon } from 'lucide-react';
 
 interface Message {
   id: string;
@@ -237,18 +238,24 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="flex flex-col h-full v-full bg-gray-40 rounded-lg shadow-lg">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-800">
-            🎙️ Voice Chat Assistant
-          </h1>
-          <Link href="/" className="text-blue-600 hover:underline">
-            ← Home
-          </Link>
-        </div>
-
+            <div className="bg-gradient-to-r from-slate-700 to-slate-800 text-white p-4 rounded-t-lg flex justify-between items-center">
+                <div>
+                <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <Bot className="w-6 h-6" />
+                    Digital Twin
+                </h2>
+                <p className="text-sm text-slate-300 mt-1">My AI companion</p>
+                </div>
+                <div className="flex justify-end items-center">
+                   <Link href="/" className="text-blue-600 hover:underline text-sm mt-2"><button className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"><MessageCircleIcon className="w-6 h-6" /></button></Link>
+                </div>
+                
+            </div>
+            <div>
+              
+            </div>
         {/* Status Indicators */}
         <div className="bg-white rounded-lg shadow-md p-4 mb-6">
           <div className="flex items-center justify-between">
@@ -347,7 +354,7 @@ export default function ChatPage() {
             </div>
           )}
         </div>
-      </div>
+      
     </div>
   );
 }
