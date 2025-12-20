@@ -215,6 +215,12 @@ export default function Twin() {
                 )}
 
                 <div ref={messagesEndRef} />
+                {/* --- Minimalist Info Footer --- */}
+                <div className="p-10 text-center absolute bottom-11 left-1/2 transform -translate-x-1/2">
+                    <p className="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-black">
+                        Powered by GPT-4o
+                    </p>
+                </div>
             </div>
 
             {/* Input */}
