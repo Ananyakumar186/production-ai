@@ -112,7 +112,7 @@ export default function Twin() {
     }, []);
 
     return (
-        <div className="flex flex-col h-full v-full bg-gray-40 rounded-lg shadow-lg">
+        <div className="flex flex-col h-full v-full bg-gray-40 shadow-lg">
             {/* Header */}
             <div className="bg-gradient-to-r from-slate-700 to-slate-800 text-white p-4 rounded-t-lg">
                 <h2 className="text-xl font-semibold flex items-center gap-2">

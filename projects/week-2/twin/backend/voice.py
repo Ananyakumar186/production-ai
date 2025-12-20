@@ -1,7 +1,7 @@
 import requests
 from dotenv import load_dotenv
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI,HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
@@ -17,14 +17,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.route('/session', methods=['GET'])
+@app.get('/session')
 def get_session():
     try:
         url = "https://api.openai.com/v1/realtime/sessions"
         
         payload = {
-            "model": "gpt-4o-realtime-preview-2024-12-17",
+            "model": "gpt-realtime",
             "modalities": ["audio", "text"],
+            "voice": "ash",  # Options: 'ash', 'echo', or 'onyx' for male-sounding voices
+            "max_response_output_tokens": 4096, 
+            "turn_detection": {
+            "type": "server_vad",
+            "threshold": 0.5,
+            "prefix_padding_ms": 300,
+            "silence_duration_ms": 1000  # Increased to 1s to prevent early cutoff
+    },
             "instructions": "You are a friendly assistant."
         }
         
@@ -37,7 +45,8 @@ def get_session():
         return response.json()
 
     except Exception as e:
-        return e
+        # Proper error reporting
+        raise HTTPException(status_code=500, detail=str(e))
     
 
 if __name__ == "__main__":
