@@ -10,7 +10,7 @@ import os
 from dotenv import load_dotenv
 from typing import Optional, List, Dict
 import uuid
-from context import prompt
+from context import promptChat, promptSpeech
 
 # Load environment variables
 load_dotenv()
@@ -71,7 +71,7 @@ async def chat(request: ChatRequest):
         session_id = request.session_id or str(uuid.uuid4())
         # Build messages with system prompt and history
         messages = [
-            {"role": "system", "content": prompt()}
+            {"role": "system", "content": promptChat()}
         ]
         
         # Add conversation history if provided
@@ -121,7 +121,7 @@ def get_session():
             "prefix_padding_ms": 300,
             "silence_duration_ms": 1000  # Increased to 1s to prevent early cutoff
             },
-            "instructions": "You are a friendly assistant."
+            "instructions": promptSpeech()
         }
         
         headers = {

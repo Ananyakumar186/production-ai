@@ -190,44 +190,44 @@
             "title": "Microsoft Certified: Azure Fundamentals",
             "issuer": "Microsoft",
             "date": "Jan 2024",
-            "link": "../data/certificates/MFA.pdf"
+            "link": "/certifications/MFA.pdf"
         },
         {
             "title": "LLM Engineering: Master AI, Large Language Models, and Agents",
             "issuer": "Udemy",
             "date": "Jul 2025",
-            "link": "../data/certificates/LLM.pdf"
+            "link": "/certifications/LLM.pdf"
         },
         {
             "title": "Angular",
             "issuer": "Data Tech Labs",
             "date": "Aug 2022",
-            "link": "../data/certificates/Angular.pdf"
+            "link": "/certifications/Angular.pdf"
         },
         {
             "title": "SQL",
             "issuer": "Hackerrank",
             "date": "Sept 2023",
-            "link1": "../data/certificates/sql_basic.pdf",
-            "link2": "../data/certificates/sql_intermediate.pdf"
+            "link1": "/certifications/sql_basic.pdf",
+            "link2": "/certifications/sql_intermediate.pdf"
         },
         {
             "title": "Git",
             "issuer": "Coursera",
             "date": "Aug 2020",
-            "link": "../data/certificates/Git.pdf"
+            "link": "/certifications/Git.pdf"
         },
         {
             "title": "Restful API using Node.js and Express",
             "issuer": "NIIT",
             "date": "Apr 2024",
-            "link": "../data/certificates/API.pdf"
+            "link": "/certifications/API.pdf"
         },
         {
             "title": "Flutter & Dart Essentials- Build Mobile Apps like a Pro",
             "issuer": "Udemy",
             "date": "Dec 2024",
-            "link": "../data/certificates/MAD.pdf"
+            "link": "/certifications/MAD.pdf"
         }
 
     ]

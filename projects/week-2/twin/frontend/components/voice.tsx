@@ -1,20 +1,41 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Bot, RefreshCcw, MessageCircle, Mic, MicOff, AlertCircle } from 'lucide-react';
+import { Bot, RefreshCcw, MessageCircle, Mic, MicOff, AlertCircle, Quote } from 'lucide-react';
 import Link from 'next/link';
+
+interface Message {
+    id: string;
+    role: 'user' | 'assistant';
+    content: string;
+    timestamp: Date;
+}
 
 export default function VoiceAssistant() {
     const [status, setStatus] = useState<string>('Disconnected');
     const [error, setError] = useState<string | null>(null);
     const pcRef = useRef<RTCPeerConnection | null>(null);
     const dcRef = useRef<RTCDataChannel | null>(null);
+    const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
+    const [streamingAiText, setStreamingAiText] = useState("");
     const isLive = status === 'Live';
     const isConnecting = status === 'Connecting...';
+    const [transcriptEnabled, setTranscriptEnabled] = useState(false);
+    // --- SCROLLING REFS ---
+    const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         return () => stopSession();
     }, []);
+
+    useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollTo({
+                top: scrollRef.current.scrollHeight,
+                behavior: 'smooth' // Smooth sliding effect
+            });
+        }
+    }, [streamingAiText, messages]);
 
     const stopSession = () => {
         if (pcRef.current) {
@@ -30,6 +51,8 @@ export default function VoiceAssistant() {
             dcRef.current.close();
             dcRef.current = null;
         }
+        setStreamingAiText("");
+        setMessages([]);
         setStatus('Disconnected');
     };
 
@@ -40,6 +63,7 @@ export default function VoiceAssistant() {
 
             const response = await fetch('http://localhost:8000/session');
             const data = await response.json();
+
             if (!data.client_secret?.value) throw new Error("Backend error: No secret received");
 
             const pc = new RTCPeerConnection();
@@ -62,13 +86,25 @@ export default function VoiceAssistant() {
             };
 
             dc.onmessage = (e) => {
-                const realtimeEvent = JSON.parse(e.data);
-                console.log("OpenAI Event:", realtimeEvent.type);
+                const event = JSON.parse(e.data);
 
-                // If the server sends an error, catch it here
-                if (realtimeEvent.type === "error") {
-                    setError(realtimeEvent.error.message);
+                // USER MESSAGE: When the user finishes speaking, push to array
+                if (event.type === 'conversation.item.input_audio_transcription.completed') {
+                    setMessages(prev => [...prev, { role: 'user', text: event.transcript }]);
                 }
+
+                // AI DELTA: Update the temporary streaming state
+                if (event.type === 'response.audio_transcript.delta') {
+                    setStreamingAiText(prev => prev + event.delta);
+                }
+
+                // AI DONE: Push the completed AI response to the array and clear the stream
+                if (event.type === 'response.audio_transcript.done') {
+                    setMessages(prev => [...prev, { role: 'assistant', text: event.transcript }]);
+                    setStreamingAiText("");
+                }
+
+                if (event.type === "error") setError(event.error.message);
             };
 
             // Handle connection state changes for debugging
@@ -114,7 +150,7 @@ export default function VoiceAssistant() {
         <div className="flex flex-col h-full v-full bg-gray-40 shadow-lg">
 
             {/* --- Header --- */}
-            <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-6 flex justify-between items-center shadow-md">
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-4 flex justify-between items-center shadow-md">
                 <div>
                     <h2 className="text-xl font-bold flex items-center gap-2">
                         <div className={`p-1.5 rounded-lg ${isLive ? 'bg-green-500 animate-pulse' : 'bg-slate-700'}`}>
@@ -129,7 +165,7 @@ export default function VoiceAssistant() {
                 </div>
 
                 <Link href="/">
-                    <button className="p-2.5 bg-slate-700/50 hover:bg-slate-700 rounded-full transition-all border border-slate-600">
+                    <button className="p-2.5 bg-slate-700/50 hover:bg-slate-700 rounded-full transition-all border border-slate-600 cursor-pointer">
                         <MessageCircle className="w-5 h-5 text-slate-200" />
                     </button>
                 </Link>
@@ -146,6 +182,18 @@ export default function VoiceAssistant() {
                     </div>
                 )}
 
+                {/* Transcript Enable Button */}
+                <button
+                    onClick={() => {
+                        transcriptEnabled ? setTranscriptEnabled(false) : setTranscriptEnabled(true);
+                    }}
+                    className={`absolute top-2 p-2 rounded-full transition-all border cursor-pointer
+                        ${transcriptEnabled ? 'right-80 bg-blue-600 border-blue-500 shadow-lg' : 'right-4 bg-slate-800 border-slate-700 hover:bg-slate-700 shadow-md'}
+                    `}
+                >
+                    <Quote className="w-5 h-5 text-white" />
+                </button>
+
                 {/* Central Interactive Mic */}
                 <button
                     onClick={handleMicClick}
@@ -159,9 +207,9 @@ export default function VoiceAssistant() {
                     {isConnecting ? (
                         <RefreshCcw className="w-16 h-16 text-blue-400 animate-spin" />
                     ) : isLive ? (
-                        <Mic className="w-16 h-16 text-white transition-transform group-hover:scale-110" />
+                        <Mic className="w-14 h-14 text-white transition-transform group-hover:scale-110" />
                     ) : (
-                        <MicOff className="w-16 h-16 text-slate-500 transition-transform group-hover:scale-110" />
+                        <MicOff className="w-14 h-14 text-slate-500 transition-transform group-hover:scale-110" />
                     )}
                 </button>
 
@@ -175,8 +223,62 @@ export default function VoiceAssistant() {
                             ? "Go ahead, I'm ready to chat with you in real-time."
                             : "Establish a secure voice connection with your digital twin."}
                     </p>
-                    
+
                 </div>
+
+                {transcriptEnabled && (
+                    <>
+                        {/* Gradient Fades for Smooth Appearance */}
+                        <div className="relative top-3 left-0 right-0 h-12 bg-linear-to-b from-slate-950 to-transparent z-10 pointer-events-none" />
+
+                        <div className="flex-1 overflow-y-auto scrollbar-hide absolute right-2 top-3" ref={scrollRef}>
+                            <div className="flex flex-col space-y-6"> {/* This space-y-6 creates the break lines */}
+
+                                {messages.map((msg, index) => (
+                                    <div
+                                        key={index}
+                                        className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
+                                    >
+                                        {/* User Label/Style */}
+                                        {msg.role === 'user' ? (
+                                            <div className="text-slate-500 text-xs mb-1 mr-2 uppercase tracking-widest font-bold">You</div>
+                                        ) : (
+                                            <div className="text-blue-500 text-xs mb-1 ml-2 uppercase tracking-widest font-bold">AI</div>
+                                        )}
+
+                                        {/* Message Bubble */}
+                                        <div className={`max-w-72 p-4 rounded-2xl leading-relaxed ${msg.role === 'user'
+                                            ? 'bg-white/5 border border-white/10 text-slate-300 rounded-tr-none'
+                                            : 'bg-blue-600/10 border border-blue-500/20 text-blue-500 rounded-tl-none'
+                                            }`}>
+                                            {msg.text}
+                                        </div>
+                                    </div>
+                                ))}
+
+                                {/* --- Active Streaming AI Message --- */}
+                                {streamingAiText && (
+                                    <div className="flex flex-col items-start animate-in fade-in slide-in-from-bottom-2 relative right-0">
+                                        <div className="text-blue-500 text-xs mb-1 ml-2 uppercase tracking-widest font-bold font-mono">
+                                            Typing...
+                                        </div>
+                                        <div className="max-w-72 p-4 rounded-2xl bg-blue-600/20 border border-blue-400/30 text-blue-500 rounded-tl-none">
+                                            {streamingAiText}
+                                        </div>
+                                    </div>
+                                )}
+                                { !streamingAiText && messages.length == 0 && (
+                                    <div className="relative top-3 ml-10 mr-10">
+                                        <p className="text-slate-500 italic">Please connect to transcript</p>
+                                    </div>
+                                )}
+
+                                {/* Bottom Spacer for Auto-scroll */}
+                                <div className="h-4" />
+                            </div>
+                        </div>
+                    </>
+                )}
 
                 {/* Simple Error Overlay */}
                 {error && (
@@ -188,9 +290,9 @@ export default function VoiceAssistant() {
             </div>
 
             {/* --- Minimalist Info Footer --- */}
-            <div className="p-10 text-center">
+            <div className="p-2 text-center">
                 <p className="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-black">
-                    Powered by GPT-4o Realtime
+                    Powered by GPT Realtime
                 </p>
             </div>
         </div>

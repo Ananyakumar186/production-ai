@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, RefreshCcw, LucideSpeaker } from 'lucide-react';
+import { Send, Bot, User, RefreshCcw, Mic } from 'lucide-react';
 import Link from 'next/link';
 interface Message {
     id: string;
@@ -30,7 +30,7 @@ export default function Twin() {
         if (messages.length === 0 || isLoading) return;
         setMessages([]);
     };
-    
+
     const sendMessage = async () => {
         if (!input.trim() || isLoading) return;
 
@@ -114,44 +114,55 @@ export default function Twin() {
     return (
         <div className="flex flex-col h-full v-full bg-gray-40 shadow-lg">
             {/* Header */}
-            <div className="bg-gradient-to-r from-slate-700 to-slate-800 text-white p-4 rounded-t-lg">
-                <h2 className="text-xl font-semibold flex items-center gap-2">
-                    <Bot className="w-6 h-6" />
-                    Digital Twin
-                </h2>
-                <p className="text-sm text-slate-300 mt-1">My AI companion</p>
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-4 flex justify-between items-center shadow-md">
+                <div>
+                    <h2 className="text-xl font-bold flex items-center gap-2">
+                        <div className="p-1.5 rounded-lg bg-slate-700">
+                            <Bot className="w-5 h-5 text-white" />
+                        </div>
+                        Digital Twin
+                    </h2>
+                    <div className="flex items-center p-1 gap-4 mt-1"> <p className="text-sm text-slate-300 mt-1">My AI companion</p></div>
+                   
+                </div>
+
+                <Link href="/speech">
+                    <button className="p-2.5 bg-slate-700/50 hover:bg-slate-700 rounded-full transition-all border border-slate-600 cursor-pointer">
+                        <Mic className="w-5 h-7" />
+                    </button>
+                </Link>
             </div>
+
             {/* Messages */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {messages.length === 0 && (
                     <div className="text-center text-gray-700 mt-8">
                         {hasAvatar ? (
-                            <img 
-                                src="/avatar.jpeg" 
-                                alt="Digital Twin Avatar" 
-                                className="w-20 h-20 rounded-full mx-auto mb-3 border-2 border-gray-300"
+                            <img
+                                src="/avatar.jpeg"
+                                alt="Digital Twin Avatar"
+                                className="w-30 h-30 rounded-full mx-auto mb-3 border-2 border-gray-300"
                             />
                         ) : (
-                            <Bot className="w-12 h-12 mx-auto mb-3 text-gray-400" />
+                                <Bot className="w-14 h-14 mx-auto mb-3 text-gray-400" />
                         )}
                         <p>Hello! I&apos;m your Digital Twin.</p>
                         <p className="text-sm mt-2">Ask anything about me!</p>
                     </div>
                 )}
 
-                 {messages.map((message) => (
+                {messages.map((message) => (
                     <div
                         key={message.id}
-                        className={`flex gap-3 ${
-                            message.role === 'user' ? 'justify-end' : 'justify-start'
-                        }`}
+                        className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'
+                            }`}
                     >
                         {message.role === 'assistant' && (
                             <div className="flex-shrink-0">
                                 {hasAvatar ? (
-                                    <img 
-                                        src="/avatar.jpeg" 
-                                        alt="Digital Twin Avatar" 
+                                    <img
+                                        src="/avatar.jpeg"
+                                        alt="Digital Twin Avatar"
                                         className="w-8 h-8 rounded-full border border-slate-300"
                                     />
                                 ) : (
@@ -163,17 +174,15 @@ export default function Twin() {
                         )}
 
                         <div
-                            className={`max-w-[70%] rounded-lg p-3 ${
-                                message.role === 'user'
-                                    ? 'bg-slate-700 text-white'
-                                    : 'bg-white border border-gray-200 text-gray-800'
-                            }`}
-                        >
-                            <p className="whitespace-pre-wrap text-justify">{message.content}</p>
-                            <p
-                                className={`text-xs mt-1 ${
-                                    message.role === 'user' ? 'text-slate-300' : 'text-gray-500'
+                            className={`max-w-[70%] rounded-lg p-3 ${message.role === 'user'
+                                ? 'bg-slate-700 text-white'
+                                : 'bg-white border border-gray-200 text-gray-800'
                                 }`}
+                        >
+                            <div className="whitespace-pre-wrap text-justify" dangerouslySetInnerHTML={{ __html: message.content }}></div>
+                            <p
+                                className={`text-xs mt-1 ${message.role === 'user' ? 'text-slate-300' : 'text-gray-500'
+                                    }`}
                             >
                                 {message.timestamp.toLocaleTimeString()}
                             </p>
@@ -193,9 +202,9 @@ export default function Twin() {
                     <div className="flex gap-3 justify-start">
                         <div className="flex-shrink-0">
                             {hasAvatar ? (
-                                <img 
-                                    src="/avatar.jpeg" 
-                                    alt="Digital Twin Avatar" 
+                                <img
+                                    src="/avatar.jpeg"
+                                    alt="Digital Twin Avatar"
                                     className="w-8 h-8 rounded-full border border-slate-300"
                                 />
                             ) : (
@@ -215,18 +224,12 @@ export default function Twin() {
                 )}
 
                 <div ref={messagesEndRef} />
-                {/* --- Minimalist Info Footer --- */}
-                <div className="p-10 text-center absolute bottom-11 left-1/2 transform -translate-x-1/2">
-                    <p className="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-black">
-                        Powered by GPT-4o
-                    </p>
-                </div>
             </div>
 
             {/* Input */}
             <div className="border-t border-gray-200 p-4 bg-white rounded-b-lg">
                 <div className="flex gap-2">
-                    
+
                     <input
                         type="text"
                         value={input}
@@ -239,24 +242,25 @@ export default function Twin() {
                     <button
                         onClick={refreshMessage}
                         disabled={isLoading || messages.length === 0}
-                        className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
                     >
                         <RefreshCcw className="w-5 h-5" />
                     </button>
-                    <Link href="/speech"><button
-                        className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                        <LucideSpeaker className="w-5 h-7" />
-                    </button>
-                    </Link>
+
                     <button
                         onClick={sendMessage}
                         disabled={!input.trim() || isLoading}
-                        className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
                     >
                         <Send className="w-5 h-5" />
                     </button>
                 </div>
+            </div>
+            {/* --- Minimalist Info Footer --- */}
+            <div className="p-1 text-center relative bottom-0 left-1/2 transform -translate-x-1/2">
+                <p className="text-[10px] text-slate-600 uppercase tracking-[0.3em] font-black">
+                    Powered by GPT-4o
+                </p>
             </div>
         </div>
     );
