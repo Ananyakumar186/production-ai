@@ -8,3 +8,4 @@ openai-agents
 aiofiles
 urllib3==1.26.6
 six==1.16.0
+uuid

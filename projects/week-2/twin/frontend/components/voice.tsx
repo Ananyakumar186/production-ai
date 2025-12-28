@@ -20,6 +20,7 @@ export default function VoiceAssistant() {
     const [streamingAiText, setStreamingAiText] = useState("");
     const isLive = status === 'Live';
     const isConnecting = status === 'Connecting...';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
     const [transcriptEnabled, setTranscriptEnabled] = useState(false);
     // --- SCROLLING REFS ---
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -61,7 +62,7 @@ export default function VoiceAssistant() {
             setStatus('Connecting...');
             setError(null);
 
-            const response = await fetch('http://localhost:8000/session');
+            const response = await fetch(`${baseUrl}/session`);
             const data = await response.json();
 
             if (!data.client_secret?.value) throw new Error("Backend error: No secret received");

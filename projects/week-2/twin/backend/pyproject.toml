@@ -16,3 +16,6 @@ dependencies = [
     "urllib3==1.26.6",
     "uvicorn>=0.38.0",
 ]
+
+[project.scripts]
+app = "backend.server:app"
