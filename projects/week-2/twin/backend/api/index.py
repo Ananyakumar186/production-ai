@@ -58,10 +58,8 @@ class SpeechRequest(BaseModel):
 
    
 @app.get("/")
-async def root():
-    return {
-        "message": "AI Digital Twin",
-    }
+def read_root():
+    return {"Python": "on Vercel"}
 
 
 @app.post("/chat", response_model=ChatResponse)
@@ -137,10 +135,3 @@ def get_session():
         raise HTTPException(status_code=500, detail=str(e))
     
 
-
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
