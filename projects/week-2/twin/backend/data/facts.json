@@ -228,7 +228,12 @@
             "issuer": "Udemy",
             "date": "Dec 2024",
             "link": "../data/certificates/MAD.pdf"
+        },
+        {
+            "title": "AI Engineer MLOps Track: Deploy Gen AI & Agentic AI at Scale",
+            "issuer": "Udemy",
+            "date": "Jan 2026",
+            "link": "../data/certificates/AI-deploy.pdf"
         }
-
     ]
 }
