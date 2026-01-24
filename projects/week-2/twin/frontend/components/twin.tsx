@@ -179,7 +179,7 @@ export default function Twin() {
                                 : 'bg-white border border-gray-200 text-gray-800'
                                 }`}
                         >
-                            <div className="whitespace-pre-wrap text-justify" dangerouslySetInnerHTML={{ __html: message.content }}></div>
+                            <div className="whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: message.content }}></div>
                             <p
                                 className={`text-xs mt-1 ${message.role === 'user' ? 'text-slate-300' : 'text-gray-500'
                                     }`}
