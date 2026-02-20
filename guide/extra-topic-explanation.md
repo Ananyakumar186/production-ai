@@ -14,12 +14,12 @@
 
 5. **Ecosystem**: Incredibly Rich (Forms, Routing, UI component libraries like Material UI, Chakra UI)
 
-# NextJS (*built by Vercel*):
+# NextJS (_built by Vercel_):
 
 - This is the framework built on top of React
 - Includes 2 approaches for Routing requests for pages:
-    - Pages router (pages/) is simpler, trusted, very common.
-    - App Router (app/) is newer, more powerful.
+  - Pages router (pages/) is simpler, trusted, very common.
+  - App Router (app/) is newer, more powerful.
 - Pages can be rendered client-side or server-side.
 - Includes built-in tooling to transpile & bundle.
 
@@ -31,13 +31,11 @@
 
 - **FastAPI**: Modern, async, built on Starlette and Pydantic, Optimized for APIs
 
-
 # Compare Cloud Services
 
 ![image info](./cloud-service-compare-chart.png)
 
-
-# AWS 
+# AWS
 
 ## Cloud Deployment Archetypes
 
@@ -56,15 +54,14 @@
 ### Components
 
 - **IAM**: Identity Access Management
+  - Granular security is one of AWS's strengths (Super tiresome and painful, but for good reason)
 
-    - Granular security is one of AWS's strengths (Super tiresome and painful, but for good reason)
+  - We will start by creating a Root User (Only used for assigning permission & budgeting)
 
-    - We will start by creating a Root User (Only used for assigning permission & budgeting)
+  - Then we will create our "IAM User" (Called aiengineer - we will be our workhorse for the course)
 
-    - Then we will create our "IAM User" (Called aiengineer - we will be our workhorse for the course)
-
-    - As per the policy adding or permission to access various components or resources in AWS.
-        - From Root User, we can **add or create custom policies**, which will be tagged to the User Group policy for a certain IAM user.
+  - As per the policy adding or permission to access various components or resources in AWS.
+    - From Root User, we can **add or create custom policies**, which will be tagged to the User Group policy for a certain IAM user.
 
 - **Amazon S3: Simple Storage Service**: Like a shared drive in the cloud, organized in "buckets", this is where the build file is uploaded, and memory management for api to handle history.
 
@@ -84,24 +81,23 @@
 
 - **CloudWatch**: Monitoring (Collects logs from all your AWS services)
 
-- **Amazon SageMaker** (*It's like huggingFace*)
+- **Amazon SageMaker** (_It's like huggingFace_)
+  - **End-end ML development**: Build , train, fine-tune, deploy and manage your own models.
 
-    - **End-end ML development**: Build , train, fine-tune, deploy and manage your own models.
+  - **Model training + hosting**: Managed infrastructure for running training jobs and deploying trained models as scalable, production ready end-points.
 
-    - **Model training + hosting**: Managed infrastructure for running training jobs and deploying trained models as scalable, production ready end-points.
-
-    - **Designed for MLOps**: Includes experiment tracking, model versioning, automated model tuning, and monitoring tools to make production ML repeatable and reliable.
+  - **Designed for MLOps**: Includes experiment tracking, model versioning, automated model tuning, and monitoring tools to make production ML repeatable and reliable.
 
 - **Difference between Bedrock and SageMaker**:
 
-    ![image info](./bedrock%20vs%20sagemaker.png)
+  ![image info](./bedrock%20vs%20sagemaker.png)
 
 - **AWS Databases**
-    - **RDS**: *Relational Databse Service*: the umbrella managed service for relational databses, supporting different engines (MySQL, PostgreSQL).
-    - **Aurora**: one of the Dataase Engines offered in RDS; use RDS to create the database cluster, select Aurora as the engine. Designed by AWS to be fast and scalable.
-    - **Aurora Serverless V2**: Automatically adjusts databse capacity responding qucikly to changes in workload without downtime for pay-as-you-go scaling.
-    - **Dynamo**: is the NoSQL offering.
-    - **DocumentDB**: It is like a mongoDB style database.
+  - **RDS**: _Relational Databse Service_: the umbrella managed service for relational databses, supporting different engines (MySQL, PostgreSQL).
+  - **Aurora**: one of the Dataase Engines offered in RDS; use RDS to create the database cluster, select Aurora as the engine. Designed by AWS to be fast and scalable.
+  - **Aurora Serverless V2**: Automatically adjusts databse capacity responding qucikly to changes in workload without downtime for pay-as-you-go scaling.
+  - **Dynamo**: is the NoSQL offering.
+  - **DocumentDB**: It is like a mongoDB style database.
 
 # MLOps
 
@@ -117,7 +113,7 @@
 
 - **Controlled: Checked into Git**: .tf files with your configuration (Not checked in state files that map configuration to resources).
 
-- **Automated: Configures Everything**: No more AWS, Google Cloud, Azure  console! Everything will be automated (except IAM).
+- **Automated: Configures Everything**: No more AWS, Google Cloud, Azure console! Everything will be automated (except IAM).
 
 - **Repeatable: Destroy & Recreate**: terraform init - stands up your entire environment terraform destroy -deletes.
 
@@ -139,7 +135,6 @@
 
 - **Workspaces**: Separated State (Isolated state for the same configuration).
 
-
 # Docker
 
 - A box within your box (A lightweight alternative to VMs that shares the host's OS)
@@ -153,5 +148,37 @@
 
 - **Actions**: Platform (Run scripts in response to actions like doing a git push).
 - **Workflows**: Orchestration (YAML files stored in github/workflows).
-- **Jobs**: Execution (Collection of steps that run on a 'Runner' VM). 
+- **Jobs**: Execution (Collection of steps that run on a 'Runner' VM).
 
+# RAG (Real-time Augmented Generation):
+
+RAG is a technique used to improve the accuracy of the response given by the LLM for a particular prompt or query.
+The accuracy improved by using Embeddings and vectorization of the content.
+The main framework would be LangChain which has the modules to convert chunks into vectors using **OpenAIEmbeddings** function or any other which are available, and then can be
+stored into either **VectorDB** (which is free), **Chroma DB** (requires server), which those vector chunks can be viewed in 2D/3D graphs using **t-SNE**, these are like knowledge bases similar to traditional SQL DB or mongo db.
+
+## 10 RAG Advanced Techniques:
+
+1. **Chunking R&D**: experiment with chunking strategy. (Eg: Semantic Chunking)
+2. **Encoder R&D**: select the best Encoder model based on a test set.
+3. **Improve Prompts**: general content, the current date, relevant context and history.
+4. **Document pre-processing**: use an LLM to make the chunks and/or test for encoding.
+5. **Query rewriting**: use an LLM to convert the user's question to a RAG query.
+6. **Query expansion**: use an LLM to turn the question into multiple RAG queries.
+7. **Re-ranking**: use an LLM to sub-select from RAG results.
+8. **Hierarchical**: use an LLM to summarize at multiple levels.
+9. **Graph RAG**: retrieve content closely related to similar documents.
+10. **Agentic RAG**: use Agents for retrieval, combining with Memory and Tools such as SQL.
+
+## Evaluation Metrics:
+- Curate a Test Set - Example questions set with the right context identified and reference answers provided.
+
+### Measure Retrieval
+
+- **MRR (Mean Reciprocal Rank)**: Average inverse rank of first hit; 1 if the first chunk always has relevent context.
+- **nDCG (Normalized Discounted Cumulative Gain)**: Did relevent chunks get ranked higher up.
+- **Recall@K**: Proportion of tests where relevent context was in the top K chunks Or if you have multiple keywords to look for, keyword converage is similar recall metric
+- **Precision@K**: Proportion of the top K chunks that are relevent.
+
+### Measure Answers
+- Use LLM-as-a-judge to score provided answers against criteria like accuracy, completeness and relevance.
