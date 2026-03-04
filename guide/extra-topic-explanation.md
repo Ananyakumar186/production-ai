@@ -171,6 +171,7 @@ stored into either **VectorDB** (which is free), **Chroma DB** (requires server)
 10. **Agentic RAG**: use Agents for retrieval, combining with Memory and Tools such as SQL.
 
 ## Evaluation Metrics:
+
 - Curate a Test Set - Example questions set with the right context identified and reference answers provided.
 
 ### Measure Retrieval
@@ -181,4 +182,33 @@ stored into either **VectorDB** (which is free), **Chroma DB** (requires server)
 - **Precision@K**: Proportion of the top K chunks that are relevent.
 
 ### Measure Answers
+
 - Use LLM-as-a-judge to score provided answers against criteria like accuracy, completeness and relevance.
+
+# MCP:
+
+It makes it frictionless to integrate, It's taking off! Exploding ecosystem
+
+- **What it's not**:
+  - A framework for building agents
+  - A fundamental change to how agents work
+  - A way to code agents
+- **What it is**
+  - A protocol - a standard
+  - A simple way to integrate tools, resources, prompts
+  - A USB-C port for AI Applications
+
+## The three Components:
+
+1. **Host** is an LLM app like Claude or our Agent architecture.
+2. **MCP Client** lives inside Host and connects 1:1 to MCP Server.
+3. **MCP Server** provides tools, context and prompts.
+
+Example:
+
+- Claude Desktop can be used to run an MCP Client.
+- Fetch is an MCP Server that searches the web via a headless browser.
+- FileSystem is an MCP Server that helps connect any folder in the system.
+
+![image info](./mcp-architecture.png)
+
