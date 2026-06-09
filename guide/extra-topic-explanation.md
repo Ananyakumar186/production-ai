@@ -156,8 +156,10 @@ RAG is a technique used to improve the accuracy of the response given by the LLM
 The accuracy improved by using Embeddings and vectorization of the content.
 The main framework would be LangChain which has the modules to convert chunks into vectors using **OpenAIEmbeddings** function or any other which are available, and then can be
 stored into either **VectorDB** (which is free), **Chroma DB** (requires server), which those vector chunks can be viewed in 2D/3D graphs using **t-SNE**, these are like knowledge bases similar to traditional SQL DB or mongo db.
+## Two Phases of RAG: 
+<img width="302" height="323" alt="image" src="https://github.com/user-attachments/assets/b724147b-7b46-4489-8d18-3182d6985414" />
 
-## 10 RAG Advanced Techniques:
+## 10 RAG Advanced Techniques: 
 
 1. **Chunking R&D**: experiment with chunking strategy. (Eg: Semantic Chunking)
 2. **Encoder R&D**: select the best Encoder model based on a test set.
