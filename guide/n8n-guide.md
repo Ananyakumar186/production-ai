@@ -46,4 +46,11 @@
 - Now in connecting the ollama in n8n, the base url should be the one in the docker whihc is http://host.docker.internal:ollama_running_port.
   _(Only downloaded models will be visible in model dropdown in n8n ollama node.)_
 
+## Tool to extract text from PDF:
+ 1. Take a file from any storage like google drive or something where files are stored > download the file _(make sure to cover the access relateed queries with OAuth2 or similar authentication for security)_
+ 2. In n8n there is a node called Extract from PDF or any other conditionally with if node in the middle and use the information and fed it into the Ai model or do anything as per the task.
+
+## Webscraping tool:
+  **FireCrawl** is the tool that is used to extract information from web scraping with links which is supportable to LLMs.
+
 
