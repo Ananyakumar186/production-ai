@@ -214,3 +214,5 @@ Example:
 
 ![image info](./mcp-architecture.png)
 
+![image info](hallmark.png)
+
