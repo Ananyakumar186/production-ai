@@ -1,3 +1,36 @@
+# Policy Frameworks of Agentic AI:
+A policy framework is indeed a set of guidelines that control and direct actions in alignment with specific values and norms.
+
+- Policy frameworks guide AI agents to make decisions that are consistent, predictable, and    ethical, aligning with values set by designers or users.
+
+- There are two main types: decision-making frameworks, which include ethical policies and human oversight mechanisms, and rules-based frameworks, which enforce specific predefined rules for agent behavior.
+- Continuous monitoring is essential to ensure AI agents comply with these policies and adapt appropriately without violating ethical or legal standards.
+
+- Send positive feedback about Key takeaways for this video
+
+- Send negative feedback about Key takeaways for this video
+
+- Utility frameworks maximize a system's usefulness.
+  - The **utility function** maps outcomes to numerical values, calculating their desirability, which helps the system choose the best actions.
+  For example,  A Security camera scanning a person carrying an object, where the ai must rank the object based on the danger of the object.
+
+- Utility functions will be integrated with tools like below,
+  - Preference Modeling is setting user preferences and integrating them into the utility function.
+  - Probabilistic Modeling determines the amount of risk and integrating the risks into the utility function
+  - Trade Off Analysis works with risk analysis to maximize utility (*Balancing risk and utility involves trade-off analysis to find optimal solutions that align with the systems goals.*)
+
+- Reinforcement Algorithms are integral part of the agentic ai, it learns by using rewards and metrics to a desirable outcome.
+  - Q learning is one such algorithm it uses a table Q-Table to keep track of the best actions to take, gradually learning the optical actions to maximize a reward.
+  *Reward are numerical values the agent receives after taking an action in a specific state*
+
+  - Developing Q learning: 
+    1. Define the environment
+    2. Identify states.
+    3. Define actions (i.e choices) that agents can make
+    4. Establish reward signals
+    5. Develop policy
+    6. Define a value function (*Estimates the expected cumulative reward of being in a particular state and following a certain policy*)
+
 # Project Twin Architecture:
 
 ![image info](./twin-architecture.png)
