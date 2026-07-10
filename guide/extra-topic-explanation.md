@@ -6,10 +6,6 @@ A policy framework is indeed a set of guidelines that control and direct actions
 - There are two main types: decision-making frameworks, which include ethical policies and human oversight mechanisms, and rules-based frameworks, which enforce specific predefined rules for agent behavior.
 - Continuous monitoring is essential to ensure AI agents comply with these policies and adapt appropriately without violating ethical or legal standards.
 
-- Send positive feedback about Key takeaways for this video
-
-- Send negative feedback about Key takeaways for this video
-
 - Utility frameworks maximize a system's usefulness.
   - The **utility function** maps outcomes to numerical values, calculating their desirability, which helps the system choose the best actions.
   For example,  A Security camera scanning a person carrying an object, where the ai must rank the object based on the danger of the object.
