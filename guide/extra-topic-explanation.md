@@ -27,6 +27,24 @@ A policy framework is indeed a set of guidelines that control and direct actions
     5. Develop policy
     6. Define a value function (*Estimates the expected cumulative reward of being in a particular state and following a certain policy*)
 
+# Architecture:
+
+- **Major vs. Minor Architectures:** Major architectures handle strategic tasks and overall control, while minor architectures manage specific smaller tasks within the system.
+
+- Seven Major Architectures: These include 
+  1. single-agent *(one agent solving a problem)*
+  2. multi-agent *(collaborative agents)*, 
+  3. reflection-based *(agents self-evaluate and refine)*, 
+  4. tool integrated *(agents use external tools)*, 
+  5. planning centric *(agents break down complex tasks into steps)*, 
+  6. generative AI networks *(agents collaborate to leverage specialized skills)*
+  7. human-AI collaboration *(agents automate routine tasks to support human creativity)*.
+
+- **Architecture Impact:** The architecture shapes how AI agents process information, learn, and   make decisions, which is crucial for building effective autonomous systems.
+
+
+
+
 # Project Twin Architecture:
 
 ![image info](./twin-architecture.png)
