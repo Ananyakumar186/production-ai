@@ -42,8 +42,20 @@ A policy framework is indeed a set of guidelines that control and direct actions
 
 - **Architecture Impact:** The architecture shapes how AI agents process information, learn, and   make decisions, which is crucial for building effective autonomous systems.
 
+- Types of minor based architecture: 
+  1. **Behavior based:** It is a reactive based architecture because it emphasizes on specific behavior or model patterns that are less applicable across the domain.
+  2. **Emotional based:**  It is a humanized ai agents, that respond like a emotion to a certain problem.
+  3. **Swarm Intelligence:** It is a collective based or community-based architecture of agents, that are used to leverage specific behavior something like ant colony.
 
+  *At the end of the day, the minor architecture is a custom designed architecture which is used to tackle a specific task.*
 
+# Developing a Multi Agent Co operative system: 
+
+  - **Determine communication protocols** *It is protocols or ontologies that all agents must follow to communicate which ensures robust and secure system*
+  - **Define shared goals and rewards** *For eg.. Maximizing sales thorough less costs when agents collaborate together they can get the work done effectively*
+  - **Setup Co-ordination mechanisms** *Helps in organizing the efforts to avoid conflicts,redundant actions*
+  - **Establish de-centralized decision making** *This is critical , where the agents must be capable of taking independent decisions which maximizes efficiency and reduce redundancy*
+  - **Define role specialization** *Assigning specific abilities to different agents based on their capabilities, doing this maximizes efficiency and reduce redundancy*
 
 # Project Twin Architecture:
 
